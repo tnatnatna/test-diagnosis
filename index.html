@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>今日の運勢診断</title>
+  <style>
+    body { font-family: sans-serif; background: #fefefe; text-align: center; padding: 50px; }
+    .question { margin-bottom: 20px; }
+    button { margin: 5px; padding: 10px 20px; }
+    #result { margin-top: 30px; font-size: 24px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>今日の運勢診断</h1>
+
+  <div class="question" id="q1">
+    <p>朝起きて最初にすることは？</p>
+    <button onclick="addScore(1)">コーヒーを飲む</button>
+    <button onclick="addScore(2)">ストレッチする</button>
+    <button onclick="addScore(3)">二度寝する</button>
+  </div>
+
+  <div class="question" id="q2">
+    <p>今日の気分に近いのは？</p>
+    <button onclick="addScore(1)">ワクワク</button>
+    <button onclick="addScore(2)">落ち着き</button>
+    <button onclick="addScore(3)">のんびり</button>
+  </div>
+
+  <div class="question" id="q3">
+    <p>ランチで食べたいのは？</p>
+    <button onclick="addScore(1)">カレー</button>
+    <button onclick="addScore(2)">パスタ</button>
+    <button onclick="addScore(3)">サラダ</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    let score = 0;
+
+    function addScore(n) {
+      score += n;
+      const nextQ = document.querySelector('.question:not([style*="display: none"])');
+      if(nextQ) nextQ.style.display = 'none';
+
+      if(document.querySelectorAll('.question[style*="display: none"]').length === 3){
+        showResult();
+      }
+    }
+
+    function showResult() {
+      let message = '';
+      if(score <= 3) message = "最高の一日！🌟";
+      else if(score <= 5) message = "穏やかな一日☀️";
+      else message = "リラックスデー🛋️";
+      document.getElementById('result').innerText = message;
+    }
+  </script>
+</body>
+</html>
